@@ -1,0 +1,155 @@
+db.createCollection("Usuarios")
+db.createCollection("Libros")
+db.Usuarios.insertMany([
+  {
+    nombre: "Carlos",
+    apellido: "González",
+    correo: "carlos.gonzalez@medellin.gov.co",
+    librosPrestados: [
+      { idLibro: ObjectId("64d0c0a6f4c6c527a45d1234"), fechaPrestamo: new Date("2024-01-15") },
+      { idLibro: ObjectId("64d0c0a6f4c6c527a45d5678"), fechaPrestamo: new Date("2024-02-03") }
+    ]
+  },
+  {
+    nombre: "Lucía",
+    apellido: "Martínez",
+    correo: "lucia.martinez@elpoli.edu.co",
+    librosPrestados: [
+      { idLibro: ObjectId("64d0c0a6f4c6c527a45d2345"), fechaPrestamo: new Date("2024-03-12") }
+    ]
+  },
+  {
+    nombre: "Andrés",
+    apellido: "Salazar",
+    correo: "andres.salazar@gmail.com",
+    librosPrestados: [
+      { idLibro: ObjectId("64d0c0a6f4c6c527a45d3456"), fechaPrestamo: new Date("2024-05-22") }
+    ]
+  },
+  {
+    nombre: "María",
+    apellido: "Rodríguez",
+    correo: "maria.rodriguez@medellin.gov.co",
+    librosPrestados: [
+      { idLibro: ObjectId("64d0c0a6f4c6c527a45d4567"), fechaPrestamo: new Date("2024-07-01") }
+    ]
+  },
+  {
+    nombre: "Juan",
+    apellido: "López",
+    correo: "juan.lopez@elpoli.edu.co",
+    librosPrestados: [
+      { idLibro: ObjectId("64d0c0a6f4c6c527a45d5678"), fechaPrestamo: new Date("2024-08-15") },
+      { idLibro: ObjectId("64d0c0a6f4c6c527a45d6789"), fechaPrestamo: new Date("2024-09-05") }
+    ]
+  }
+])
+
+db.Libros.insertMany([
+  {
+    titulo: "Don Quijote de la Mancha",
+    autor: "Miguel de Cervantes",
+    genero: "Novela",
+    anioPublicacion: 1605,
+    editorial: "Francisco de Robles",
+    disponibilidad: true
+  },
+  {
+    titulo: "Moby Dick",
+    autor: "Herman Melville",
+    genero: "Aventura",
+    anioPublicacion: 1851,
+    editorial: "Harper & Brothers",
+    disponibilidad: true
+  },
+  {
+    titulo: "Orgullo y Prejuicio",
+    autor: "Jane Austen",
+    genero: "Romance",
+    anioPublicacion: 1813,
+    editorial: "T. Egerton",
+    disponibilidad: true
+  },
+  {
+    titulo: "Cien Años de Soledad",
+    autor: "Gabriel García Márquez",
+    genero: "Realismo mágico",
+    anioPublicacion: 1967,
+    editorial: "Editorial Sudamericana",
+    disponibilidad: false
+  },
+  {
+    titulo: "1984",
+    autor: "George Orwell",
+    genero: "Distopía",
+    anioPublicacion: 1949,
+    editorial: "Secker & Warburg",
+    disponibilidad: true
+  },
+  {
+    titulo: "El Gran Gatsby",
+    autor: "F. Scott Fitzgerald",
+    genero: "Tragedia",
+    anioPublicacion: 1925,
+    editorial: "Charles Scribner's Sons",
+    disponibilidad: true
+  },
+  {
+    titulo: "La Odisea",
+    autor: "Homero",
+    genero: "Épico",
+    anioPublicacion: -800,
+    editorial: "Desconocida",
+    disponibilidad: true
+  },
+  {
+    titulo: "Crimen y Castigo",
+    autor: "Fiódor Dostoyevski",
+    genero: "Psicológico",
+    anioPublicacion: 1866,
+    editorial: "The Russian Messenger",
+    disponibilidad: true
+  },
+  {
+    titulo: "El Retrato de Dorian Gray",
+    autor: "Oscar Wilde",
+    genero: "Gótico",
+    anioPublicacion: 1890,
+    editorial: "Lippincott's Monthly Magazine",
+    disponibilidad: false
+  },
+  {
+    titulo: "En Busca del Tiempo Perdido",
+    autor: "Marcel Proust",
+    genero: "Modernismo",
+    anioPublicacion: 1913,
+    editorial: "Grasset",
+    disponibilidad: true
+  }
+])
+
+db.Libros.insertMany([
+  {
+    titulo: "El Principito",
+    autor: "Antoine de Saint-Exupéry",
+    genero: "Fábula",
+    anioPublicacion: 1997,
+    editorial: "Reynal & Hitchcock",
+    disponibilidad: true
+  },
+  {
+    titulo: "La Casa de los Espíritus",
+    autor: "Isabel Allende",
+    genero: "Realismo mágico",
+    anioPublicacion: 1997,
+    editorial: "Sudamericana",
+    disponibilidad: true
+  }
+])
+
+db.Usuarios.updateOne(
+  { nombre: "Juan" },
+  { $set: { apellido: "Pérez" } }
+)
+db.Libros.find({ anioPublicacion: 1997 })
+db.Libros.deleteOne({ autor: "Gabriel García Márquez" })
