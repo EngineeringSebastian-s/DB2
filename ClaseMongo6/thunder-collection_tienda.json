@@ -1,0 +1,23 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "tienda",
+    "collectionId": "b0564dfa-de6e-48ea-94f5-c740346c3af9",
+    "dateExported": "2024-09-17T16:32:27.305Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a5f84b4f-dc7d-42ec-9952-2c6ae556267e",
+            "colId": "b0564dfa-de6e-48ea-94f5-c740346c3af9",
+            "containerId": "",
+            "name": "http://localhost:3001/tienda",
+            "url": "http://localhost:3001/tienda",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-09-17T16:31:54.999Z",
+            "modified": "2024-09-17T16:31:54.999Z",
+            "headers": []
+        }
+    ],
+    "ref": "HzwFOIzQv8gQhomq_MzcXi_h7RXsA49nzRCF7HRlXzIXYQGZNO-YDFNrXM9lurHuGgOD2B1dMwlLA6GYGwGVlw"
+}

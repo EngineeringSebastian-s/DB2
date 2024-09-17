@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "66e9a3c1d04577cad9145b53"
+  },
+  "nombre": "Producto Ejemplo",
+  "precio": 100
+},
+{
+  "_id": {
+    "$oid": "66e9a3c1d04577cad9145b54"
+  },
+  "nombre": "Camiseta Deportiva",
+  "precio": 150
+},
+{
+  "_id": {
+    "$oid": "66e9a3c1d04577cad9145b55"
+  },
+  "nombre": "Zapatos de Cuero",
+  "precio": 300
+},
+{
+  "_id": {
+    "$oid": "66e9a3c1d04577cad9145b56"
+  },
+  "nombre": "Bolso Casual",
+  "precio": 200
+}]
