@@ -1,0 +1,69 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "tienda",
+    "collectionId": "b0564dfa-de6e-48ea-94f5-c740346c3af9",
+    "dateExported": "2024-09-24T15:25:30.270Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a5f84b4f-dc7d-42ec-9952-2c6ae556267e",
+            "colId": "b0564dfa-de6e-48ea-94f5-c740346c3af9",
+            "containerId": "",
+            "name": "http://localhost:3001/tienda",
+            "url": "http://localhost:3001/tienda",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-09-17T16:31:54.999Z",
+            "modified": "2024-09-17T16:31:54.999Z",
+            "headers": []
+        },
+        {
+            "_id": "5a4e599e-9a77-4d52-90d8-698fbd0ba3bd",
+            "colId": "b0564dfa-de6e-48ea-94f5-c740346c3af9",
+            "containerId": "",
+            "name": "http://localhost:3001/guardar",
+            "url": "http://localhost:3001/guardar",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-09-24T15:21:19.503Z",
+            "modified": "2024-09-24T15:21:19.503Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\": \"Producto Ejemplo\",\n  \"precio\": 25000,\n  \"descripcion\": \"Un buen producto\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "56cb57c5-ad69-4962-86ec-c18d5550f185",
+            "colId": "b0564dfa-de6e-48ea-94f5-c740346c3af9",
+            "containerId": "",
+            "name": "http://localhost:3001/actualizar/66e9a3c1d04577cad9145b54",
+            "url": "http://localhost:3001/actualizar/66e9a3c1d04577cad9145b54",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-09-24T15:24:32.584Z",
+            "modified": "2024-09-24T15:24:32.584Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nuevoNombre\": \"Nueva Camisa Deportiva\",\n  \"nuevoPrecio\": 30000\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "2945c829-d1c6-4f53-8714-7e1fe791f30e",
+            "colId": "b0564dfa-de6e-48ea-94f5-c740346c3af9",
+            "containerId": "",
+            "name": "http://localhost:3001/eliminar/66f2d8d54617024a4fd87efe",
+            "url": "http://localhost:3001/eliminar/66f2d8d54617024a4fd87efe",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-09-24T15:25:26.014Z",
+            "modified": "2024-09-24T15:25:26.014Z",
+            "headers": []
+        }
+    ],
+    "ref": "HzwFOIzQv8gQhomq_MzcXrWWJ7_TgrOPMjRg68Z6swcxS-XfVNjVDUKnHw8qfmYbuj51PPiJ_surkL2kGKnAHg"
+}
