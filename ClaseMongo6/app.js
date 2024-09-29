@@ -11,6 +11,6 @@ dbconnect();
 
 app.use('/', router)
 
-app.listen(port, () =>{
+app.listen(port, () => {
     console.log(`el servidor esta en el puerto ${port}`);
 })
