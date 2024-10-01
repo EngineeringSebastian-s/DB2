@@ -707,4 +707,51 @@ tienda_en_linea>db.productos.updateMany({}, { $set: { "fecha_agregado": ISODate(
   modifiedCount: 4,
   upsertedCount: 0
 }
+tienda_en_linea>db.productos.find({ "fecha_agregado": { $gte: ISODate("2023-01-01T00:00:00Z"), $lt: ISODate("2024-01-01T00:00:00Z") } }).pretty();
+[
+  {
+    _id: ObjectId('66fc04d44ee9f9ba042710bc'),
+    nombre: 'Televisor',
+    categoria: 'Electrónica',
+    precio: 299.99,
+    stock: 45,
+    proveedor: { nombre: 'Sony', pais: 'Japón' },
+    calificaciones: [
+      {
+        usuario: 'Usuario3',
+        puntuacion: 4,
+        comentario: 'Buen producto'
+      }
+    ],
+    fecha_agregado: ISODate('2023-01-15T00:00:00.000Z')
+  },
+  {
+    _id: ObjectId('66fc04e24ee9f9ba042710be'),
+    nombre: 'Portátil',
+    categoria: 'Informática',
+    precio: 1099.99,
+    stock: 30,
+    proveedor: { nombre: 'HP', pais: 'Estados Unidos' },
+    fecha_agregado: ISODate('2023-01-15T00:00:00.000Z')
+  },
+  {
+    _id: ObjectId('66fc04e84ee9f9ba042710bf'),
+    nombre: 'Smartphone',
+    categoria: 'Electrónica',
+    precio: 499.99,
+    stock: 70,
+    proveedor: { nombre: 'Samsung', pais: 'Corea del Sur' },
+    fecha_agregado: ISODate('2023-01-15T00:00:00.000Z')
+  },
+  {
+    _id: ObjectId('66fc04f14ee9f9ba042710c0'),
+    nombre: 'Aspiradora',
+    categoria: 'Electrodomésticos',
+    precio: 199.99,
+    stock: 80,
+    proveedor: { nombre: 'LG', pais: 'Corea del Sur' },
+    fecha_agregado: ISODate('2023-01-15T00:00:00.000Z')
+  }
+]
+tienda_en_linea>
 ```
