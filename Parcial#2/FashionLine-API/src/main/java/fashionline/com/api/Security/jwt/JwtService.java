@@ -1,5 +1,6 @@
 package fashionline.com.api.Security.jwt;
 
+import fashionline.com.api.Models.Entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -7,8 +8,6 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import smartpot.com.api.Models.Entity.User;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,9 +27,7 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
         claims.put("email", user.getEmail());
-        // claims.put("roles", user.getAuthorities());
         return createToken(claims, user.getEmail());
-        // createToken (CustomClaims, subjectClaim)
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
@@ -49,7 +46,6 @@ public class JwtService {
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignKey())
-                //.signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 

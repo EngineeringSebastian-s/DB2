@@ -29,7 +29,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title(title)
-                        .version("v"+version)
+                        .version("v" + version)
                         .description(description)
                         .termsOfService("https://github.com/EngineeringSebastian-s/DB2/blob/main/Parcial%232/FashionLine-API/LICENSE")
                         .license(new License().name("MIT License").url("https://opensource.org/license/mit"))

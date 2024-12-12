@@ -1,16 +1,16 @@
 package fashionline.com.api.Controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
 import fashionline.com.api.Exception.ApiException;
 import fashionline.com.api.Exception.ApiResponse;
 import fashionline.com.api.Models.DAO.Service.SUser;
 import fashionline.com.api.Models.DTO.UserDTO;
 import fashionline.com.api.Models.Entity.User;
 import fashionline.com.api.Security.jwt.JwtService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")

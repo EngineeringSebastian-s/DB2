@@ -1,5 +1,6 @@
 package fashionline.com.api.Security.jwt;
 
+import fashionline.com.api.Models.DAO.Service.SUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import smartpot.com.api.Models.DAO.Service.SUser;
 
 import java.io.IOException;
 
@@ -20,10 +20,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     // TODO: implement role for jwt
 
-    private final smartpot.com.api.Security.jwt.JwtService jwtService;
+    private final fashionline.com.api.Security.jwt.JwtService jwtService;
     private final SUser serviceUser;
 
-    public JwtAuthFilter(smartpot.com.api.Security.jwt.JwtService jwtService, SUser serviceUser) {
+    public JwtAuthFilter(fashionline.com.api.Security.jwt.JwtService jwtService, SUser serviceUser) {
         this.jwtService = jwtService;
         this.serviceUser = serviceUser;
     }

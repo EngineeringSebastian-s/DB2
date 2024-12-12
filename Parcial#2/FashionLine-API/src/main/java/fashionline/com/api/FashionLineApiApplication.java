@@ -12,7 +12,7 @@ public class FashionLineApiApplication {
         SpringApplication.run(FashionLineApiApplication.class, args);
     }
 
-    private static void loadEnv(){
+    private static void loadEnv() {
         // Carga de .env
         Dotenv dotenv = Dotenv.load();
 
