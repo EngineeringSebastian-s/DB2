@@ -1,5 +1,5 @@
-#  Uso de imagen base con Java 21
-FROM openjdk:21-slim
+#  Uso de imagen base con Java 17
+FROM openjdk:17-slim
 
 # Directiorio donde se colocará la aplicación en el contenedor
 WORKDIR /app

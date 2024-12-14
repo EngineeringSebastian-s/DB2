@@ -103,7 +103,7 @@ public class SUser implements UserDetailsService {
             ));
         }
 
-        return users.getFirst();
+        return users.get(0);
     }
 
     /**
@@ -118,7 +118,7 @@ public class SUser implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repositoryUser.findByEmail(username).getFirst();
+        User user = repositoryUser.findByEmail(username).get(0);
         if (user != null) {
             return org.springframework.security.core.userdetails.User.builder()
                     .username(user.getEmail())
