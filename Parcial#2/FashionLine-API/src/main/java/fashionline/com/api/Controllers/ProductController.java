@@ -83,7 +83,7 @@ public class ProductController {
                     )
             }
     )
-    public ResponseEntity<?> getAllCategorys() {
+    public ResponseEntity<?> getAllCategories() {
         try {
             return new ResponseEntity<>(List.of(Category.values()), HttpStatus.OK);
         } catch (Exception e) {
@@ -176,6 +176,34 @@ public class ProductController {
         }
     }
 
+
+    @GetMapping("/size/{size}")
+    @Operation(
+            summary = "Buscar productos por tamaño",
+            description = "Recupera una lista de productos basados en su tamaño.",
+            responses = {
+                    @ApiResponse(
+                            description = "Productos encontrados",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(
+                                            schema = @Schema(implementation = ProductDTO.class)
+                                    ))
+                    ),
+                    @ApiResponse(
+                            description = "Productos no encontrados",
+                            responseCode = "400",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class))
+                    )
+            }
+    )
+    public ResponseEntity<?> getProductsBySize(@PathVariable String size) {
+        try {
+            return new ResponseEntity<>(serviceProductI.getProductsBySize(size), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @GetMapping("/category/{category}")
     @Operation(

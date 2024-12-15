@@ -59,14 +59,14 @@ public interface SProductI {
 
 
     /**
-     * Busca productos por su categoría.
+     * Busca productos por su Tamaño.
      * *
      * Este método devolverá una lista de productos que pertenecen a la categoría proporcionada.
      * Si no se encuentran productos en esa categoría, se lanzará una excepción {@link UnsupportedOperationException}.
      *
-     * @param size La categoría de los productos.
-     * @return Una lista de productos en la categoría especificada, mapeada a {@link ProductDTO}.
-     * @throws UnsupportedOperationException Si no se encuentran productos en esa categoría.
+     * @param size El tamaño de los productos.
+     * @return Una lista de productos con el tamaño especificado, mapeada a {@link ProductDTO}.
+     * @throws UnsupportedOperationException Si no se encuentran productos en ese tamaño.
      */
     List<ProductDTO> getProductsBySize(String size);
 
