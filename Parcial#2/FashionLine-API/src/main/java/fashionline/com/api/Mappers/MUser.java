@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
  * Esta clase es responsable de convertir los datos entre la capa de persistencia y la capa de presentación.
  */
 @Component
-public class UserMapper {
+public class MUser {
     /**
      * Convierte un UserDTO en una entidad User.
      *
      * @param userDTO El DTO del usuario que se va a convertir en entidad.
      * @return La entidad User correspondiente.
      */
-    public User toEntity(UserDTO userDTO) {
+    public static User toEntity(UserDTO userDTO) {
         User user = new User();
         user.setId(new ObjectId(userDTO.getId()));
         user.setPassword(userDTO.getPassword());
@@ -31,9 +31,9 @@ public class UserMapper {
      * @param user La entidad User que se va a convertir en DTO.
      * @return El DTO del usuario correspondiente.
      */
-    public UserDTO toDTO(User user) {
+    public static UserDTO toDTO(User user) {
         UserDTO userDTO = new UserDTO();
-        userDTO.setId(userDTO.getId());
+        userDTO.setId(user.getId().toString());
         userDTO.setPassword(user.getPassword());
         userDTO.setEmail(user.getEmail());
         return userDTO;

@@ -1,8 +1,8 @@
 package fashionline.com.api.Mappers;
 
 import fashionline.com.api.Models.DTO.ProductDTO;
+import fashionline.com.api.Models.Entity.Category;
 import fashionline.com.api.Models.Entity.Product;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,21 +10,20 @@ import org.springframework.stereotype.Component;
  * Esta clase es responsable de convertir los datos entre la capa de persistencia y la capa de presentación.
  */
 @Component
-public class ProductMapper {
+public class MProduct {
     /**
      * Convierte un ProductDTO en una entidad Product.
      *
      * @param productDTO El DTO del producto que se va a convertir en entidad.
      * @return La entidad Product correspondiente.
      */
-    public Product toEntity(ProductDTO productDTO) {
+    public static Product toEntity(ProductDTO productDTO) {
         Product product = new Product();
-        product.setId(new ObjectId(productDTO.getId()));
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(Double.valueOf(productDTO.getPrice()));
-        product.setCategory(productDTO.getCategory());
-
+        product.setCategory(Category.valueOf(productDTO.getCategory()));
+        product.setSize(productDTO.getSize());
         return product;
     }
 
@@ -34,13 +33,13 @@ public class ProductMapper {
      * @param product La entidad Product que se va a convertir en DTO.
      * @return El DTO del producto correspondiente.
      */
-    public ProductDTO toDTO(Product product) {
+    public static ProductDTO toDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(product.getId().toString());
         productDTO.setName(product.getName());
         productDTO.setDescription(product.getDescription());
-        productDTO.setCategory(product.getCategory());
-
+        productDTO.setCategory(product.getCategory().toString());
+        productDTO.setSize(product.getSize());
         return productDTO;
     }
 }
