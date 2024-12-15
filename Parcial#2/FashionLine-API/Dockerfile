@@ -5,7 +5,7 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # Copiar el archivo jar del proyecto al directorio /app en el contenedor
-COPY target/api-0.0.1-SNAPSHOT.jar /app/api-fashionline.jar
+COPY target/FashionLine-API-0.0.1-SNAPSHOT.jar /app/api-fashionline.jar
 
 # Exponer el puerto que usa la aplicación
 EXPOSE 8091

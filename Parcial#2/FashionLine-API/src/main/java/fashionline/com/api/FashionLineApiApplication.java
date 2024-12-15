@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 public class FashionLineApiApplication {
 
     public static void main(String[] args) {
-        loadEnv();
+        //loadEnv();
         SpringApplication.run(FashionLineApiApplication.class, args);
     }
 
