@@ -27,4 +27,13 @@ public interface RProduct extends MongoRepository<Product, ObjectId> {
      */
     @Query("{ 'category' : ?0 }")
     List<Product> findByCategory(String category);
+
+    /**
+     * Busca productos por su categoría.
+     *
+     * @param size El tamaño de los productos.
+     * @return Una lista de productos que pertenecen a la categoría.
+     */
+    @Query("{ 'size' : ?0 }")
+    List<Product> findBySize(String size);
 }

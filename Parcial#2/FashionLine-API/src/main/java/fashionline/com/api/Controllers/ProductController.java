@@ -5,6 +5,7 @@ import fashionline.com.api.Models.DAO.Service.SProductI;
 import fashionline.com.api.Models.DTO.ErrorDTO;
 import fashionline.com.api.Models.DTO.ProductDTO;
 import fashionline.com.api.Models.Entity.Category;
+import fashionline.com.api.Models.Entity.Size;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -82,8 +83,44 @@ public class ProductController {
                     )
             }
     )
-    public List<Category> getAllCategorys() {
-        return List.of(Category.values());
+    public ResponseEntity<?> getAllCategorys() {
+        try {
+            return new ResponseEntity<>(List.of(Category.values()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/size/All")
+    @Operation(
+            summary = "Obtener todas los tamaños de productos",
+            description = "Recupera todas los tamaños disponibles para productos en la plataforma.",
+            responses = {
+                    @ApiResponse(
+                            description = "Tamaños encontrados",
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(
+                                            schema = @Schema(implementation = Category.class,
+                                                    description = "Lista de categorías disponibles")
+                                    ))
+                    ),
+                    @ApiResponse(
+                            description = "Error al recuperar los tamaños",
+                            responseCode = "500",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorDTO.class)
+                            )
+                    )
+            }
+    )
+    public ResponseEntity<?> getAllSizes() {
+        try {
+            return new ResponseEntity<>(List.of(Size.values()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{id}")

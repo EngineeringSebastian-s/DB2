@@ -3,6 +3,7 @@ package fashionline.com.api.Mappers;
 import fashionline.com.api.Models.DTO.ProductDTO;
 import fashionline.com.api.Models.Entity.Category;
 import fashionline.com.api.Models.Entity.Product;
+import fashionline.com.api.Models.Entity.Size;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,7 +24,7 @@ public class MProduct {
         product.setDescription(productDTO.getDescription());
         product.setPrice(Double.valueOf(productDTO.getPrice()));
         product.setCategory(Category.valueOf(productDTO.getCategory()));
-        product.setSize(productDTO.getSize());
+        product.setSize(Size.valueOf(productDTO.getSize()));
         return product;
     }
 
@@ -39,7 +40,7 @@ public class MProduct {
         productDTO.setName(product.getName());
         productDTO.setDescription(product.getDescription());
         productDTO.setCategory(product.getCategory().toString());
-        productDTO.setSize(product.getSize());
+        productDTO.setSize(product.getSize().toString());
         return productDTO;
     }
 }

@@ -1,5 +1,6 @@
 package fashionline.com.api.Validation;
 
+import jakarta.validation.ValidationException;
 import org.bson.types.ObjectId;
 
 import java.util.regex.Pattern;
@@ -26,7 +27,7 @@ public class VUser {
      */
     public static void validateId(String id) {
         if (!ObjectId.isValid(id)) {
-            throw new UnsupportedOperationException("El ID '" + id + "' no es válido. Asegúrate de que tiene 24 caracteres y solo incluye dígitos hexadecimales (0-9, a-f, A-F).");
+            throw new ValidationException("El ID '" + id + "' no es válido. Asegúrate de que tiene 24 caracteres y solo incluye dígitos hexadecimales (0-9, a-f, A-F).");
         }
     }
 
@@ -38,7 +39,7 @@ public class VUser {
      */
     public static void validateEmail(String email) {
         if (!Pattern.matches(EMAIL_PATTERN, email)) {
-            throw new UnsupportedOperationException("El correo electrónico '" + email + "' no es válido. Asegúrate de que sigue el formato correcto.");
+            throw new ValidationException("El correo electrónico '" + email + "' no es válido. Asegúrate de que sigue el formato correcto.");
         }
     }
 }

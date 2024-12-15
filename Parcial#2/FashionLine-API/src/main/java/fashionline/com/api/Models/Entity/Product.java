@@ -39,11 +39,11 @@ public class Product implements Serializable {
     @Field("stock")
     private int stock;
 
-    @Size(min = 3, max = 20, message = "La categoría debe tener entre 3 y 20 caracteres.")
+    @NotBlank(message = "La categoría del producto no puede estar vacío.")
     @Field("category")
     private Category category;
 
     @NotBlank(message = "El tamaño del producto no puede estar vacío.")
     @Field("size")
-    private String size;
+    private Size size;
 }
