@@ -7,5 +7,5 @@ public enum Size {
     L,   // Grande
     XL,  // Extra grande
     XXL,  // Doble extra grande
-    ONE_SIZE // Unica
+    UNIQUE // Unica
 }
