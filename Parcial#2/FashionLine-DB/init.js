@@ -35,7 +35,7 @@ db.productos.insertMany([
             "price": 200000,
             "stock": 20,
             "category": "CLOTHING",
-            "size": "32"
+            "size": "L"
         },
         {
             "name": "Chaqueta de Cuero Negra",
@@ -59,7 +59,7 @@ db.productos.insertMany([
             "price": 180000,
             "stock": 15,
             "category": "FOOTWEAR",
-            "size": "42"
+            "size": "L"
         },
         {
             "name": "Bolso Tote Negro",
@@ -75,7 +75,7 @@ db.productos.insertMany([
             "price": 85000,
             "stock": 50,
             "category": "JEWELRY",
-            "size": "6"
+            "size": "L"
         },
         {
             "name": "Conjunto Deportivo para Mujer",
@@ -123,7 +123,7 @@ db.productos.insertMany([
             "price": 120000,
             "stock": 15,
             "category": "FOOTWEAR",
-            "size": "39"
+            "size": "L"
         },
         {
             "name": "Sombrero Panamá",
@@ -155,7 +155,7 @@ db.productos.insertMany([
             "price": 80000,
             "stock": 18,
             "category": "KIDS",
-            "size": "8"
+            "size": "L"
         },
         {
             "name": "Camisa Formal para Hombre",
@@ -195,7 +195,7 @@ db.productos.insertMany([
             "price": 220000,
             "stock": 15,
             "category": "FOOTWEAR",
-            "size": "42"
+            "size": "L"
         },
         {
             "name": "Gorra Deportiva Negra",
@@ -235,7 +235,7 @@ db.productos.insertMany([
             "price": 95000,
             "stock": 20,
             "category": "FOOTWEAR",
-            "size": "40"
+            "size": "L"
         },
         {
             "name": "Bufanda de Lana Gris",
@@ -259,7 +259,7 @@ db.productos.insertMany([
             "price": 100000,
             "stock": 22,
             "category": "KIDS",
-            "size": "10"
+            "size": "L"
         },
         {
             "name": "Perfume para Hombre",
@@ -291,7 +291,7 @@ db.productos.insertMany([
             "price": 200000,
             "stock": 18,
             "category": "FOOTWEAR",
-            "size": "38"
+            "size": "L"
         },
         {
             "name": "Sombrero de Lana Marrón",
@@ -331,7 +331,7 @@ db.productos.insertMany([
             "price": 130000,
             "stock": 25,
             "category": "CLOTHING",
-            "size": "32"
+            "size": "L"
         },
         {
             "name": "Camisa Infantil Estampada",
@@ -339,7 +339,7 @@ db.productos.insertMany([
             "price": 60000,
             "stock": 30,
             "category": "KIDS",
-            "size": "6"
+            "size": "L"
         },
         {
             "name": "Jersey de Lana Azul",
@@ -363,7 +363,7 @@ db.productos.insertMany([
             "price": 210000,
             "stock": 10,
             "category": "FOOTWEAR",
-            "size": "37"
+            "size": "L"
         },
         {
             "name": "Pijama de Seda Rosa",
@@ -387,7 +387,7 @@ db.productos.insertMany([
             "price": 180000,
             "stock": 12,
             "category": "FOOTWEAR",
-            "size": "41"
+            "size": "L"
         },
         {
             "name": "Reloj de Acero Inoxidable",
