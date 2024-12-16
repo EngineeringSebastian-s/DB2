@@ -59,7 +59,6 @@ api-fashionline:
       - SECURITY_JWT_EXPIRATION=86400000
       - SECURITY_PUBLIC_ROUTES=/auth/login,/auth/verify
       - HEADER_CORS_ALLOWED_ORIGINS=http://localhost:5173
-      - SERVER_TOMCAT_TIMEOUT=600000
       - DEBUGGER_MODE=INFO
   ports:
     - "8091:8091"
