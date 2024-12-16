@@ -1,20 +1,17 @@
 import { FormEvent, SyntheticEvent, useEffect, useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/images/icon.png";
 import Loading from "../components/Loading";
-
 
 export default function Login() {
 
-    const {login, isAuthenticated, error, loading} = useAuthContext();
+    const { login, isAuthenticated, error, loading } = useAuthContext();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     useEffect(() => {
-        console.log(isAuthenticated)
         if (isAuthenticated) {
             navigate("/home")
         }
@@ -40,89 +37,66 @@ export default function Login() {
 
     return (
         <>
-            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <img
-                        alt="smartpot"
-                        src={logo}
-                        className="mx-auto h-10 w-auto"
-                    />
-                    <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                        Sign in to your account
-                    </h2>
-                </div>
+            <style>{`
+                body {
+                    background-color: #016960;
+                    height: 100%;
+                }
+                form {
+                    width: 28%;
+                    margin: auto;
+                    padding-top: 150px;
+                }
+                .bg {
+                    background-color: #C6CDC0;
+                }
+                .btn-color {
+                    background-color: #06524B;
+                    border: none;
+                }
+            `}</style>
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form
-                        action="#"
-                        method="POST"
-                        className="space-y-6"
-                        onSubmit={handleSubmit}
-                    >
-                        <div>
-                            <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                                Email address
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    required
-                                    autoComplete="email"
-                                    className="bg-white font-semibold p-2 block w-full rounded-md border-0 py-1.5 text-gray-800 shadow-sm ring-1 ring-inset ring-green-300 placeholder:text-green-400 focus:ring-2 focus:ring-inset focus:ring-green-300 sm:text-sm/6"
-                                    value={email}
-                                    onChange={handleChangeEmail}
-                                />
-                            </div>
+            <div className="container">
+                <form className="form-group" onSubmit={handleSubmit}>
+                    <div className="mb-3 bg p-5 rounded">
+                        <h2 className="text-center">Login</h2>
+
+                        {/* Email Field */}
+                        <label htmlFor="email" className="form-label mt-4 fw-semibold">Email address</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            placeholder="name@example.com"
+                            value={email}
+                            onChange={handleChangeEmail}
+                        />
+
+                        {/* Password Field */}
+                        <label htmlFor="password" className="form-label mt-3 fw-semibold">Password</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            value={password}
+                            onChange={handleChangePassword}
+                        />
+
+                        {/* Remember Me */}
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="rememberMe" />
+                            <label className="form-check-label" htmlFor="rememberMe">Remember me</label>
                         </div>
 
-                        <div>
-                            <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-                                    Password
-                                </label>
-                                <div className="text-sm">
-                                    <a href="#" className="font-semibold text-green-600 hover:text-green-400">
-                                        Forgot password?
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="mt-2">
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    required
-                                    autoComplete="current-password"
-                                    className="bg-white font-semibold p-2 block w-full rounded-md border-0 py-1.5 text-gray-800 shadow-sm ring-1 ring-inset ring-green-300 placeholder:text-green-400 focus:ring-2 focus:ring-inset focus:ring-green-300 sm:text-sm/6"
-                                    value={password}
-                                    onChange={handleChangePassword}
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <p className="mt-10 text-center text-sm/6 text-red-500">
-                                {error}
-                            </p>
-                        </div>
-                        <div>
-                            <button
-                                type="submit"
-                                className="bg-main-colour flex w-full justify-center rounded-md px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                            >
-                                { loading ? ("Loading") : ("Sign in") }
-                            </button>
-                        </div>
-                    </form>
+                        {/* Error Message */}
+                        {error && <p className="mt-10 text-center text-sm text-red-500">{error}</p>}
 
-                    <p className="mt-10 text-center text-sm/6 text-gray-500">
-                        Not a exclusive member of FashionLine ?{' '}
-                        <a href="#" className="font-semibold text-green-600 hover:text-green-500">
-                            Free 15-day trial for the poor!
-                        </a>
-                    </p>
-                </div>
+                        {/* Submit Button */}
+                        <button type="submit" className="form-control btn-color text-light mt-3">
+                            {loading ? "Loading..." : "Sign in"}
+                        </button>
+                    </div>
+                </form>
             </div>
         </>
     )

@@ -1,12 +1,11 @@
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Root from '../routes/Root.tsx'
-
-import '../assets/styles/App.css'
 import '../routes/ErrorPage.tsx'
 import ErrorPage from "../routes/ErrorPage.tsx";
 import Login from "../routes/Login.tsx"
 import Home from "../routes/Home.tsx"
 import {AuthProvider} from "../contexts/AuthContext.tsx";
+import ProductsTable from "../routes/ProductTable.tsx";
 
 function App() {
 
@@ -25,6 +24,10 @@ function App() {
                 {
                     path: "/home",
                     element: <Home/>
+                },
+                {
+                    path: "/product",
+                    element: <ProductsTable/>
                 }
             ],
         },
