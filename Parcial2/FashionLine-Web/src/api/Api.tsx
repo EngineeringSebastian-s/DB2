@@ -1,14 +1,17 @@
-import axios from "axios";
-import { UserData } from "../contexts/AuthContext";
-import { ProductDTO } from "../types/ApiResponse.tsx";
+import axios, {AxiosError} from "axios";
+import {UserData} from "../contexts/AuthContext";
+import {ProductDTO} from "../types/ApiResponse.tsx";
 import {
+    allCategories,
     allProducts,
+    allSizes,
+    createProduct,
+    deleteProduct,
     productById,
+    productsByCategory,
     productsByName,
     productsBySize,
-    productsByCategory,
-    allCategories,
-    allSizes, deleteProduct, updateProduct, createProduct
+    updateProduct
 } from "./Endpoints";
 
 /** Obtener todos los productos */
@@ -153,9 +156,14 @@ export async function updateExistingProduct(user: UserData, id: string, productD
             console.error("Failed to update product", response);
             throw new Error("Error al actualizar el producto.");
         }
-    } catch (e) {
-        console.error("Error updating product: ", e);
-        throw new Error("Error al actualizar el producto: " + e.message);
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            console.error("Error updating product: ", e);
+            throw new Error("Error al actualizar el producto: " + e.message);
+        } else {
+            console.error("Unexpected error: ", e);
+            throw new Error("Error desconocido al actualizar el producto.");
+        }
     }
 
     return updatedProduct;
@@ -163,33 +171,29 @@ export async function updateExistingProduct(user: UserData, id: string, productD
 
 /** Eliminar un producto */
 export async function deleteProductById(user: UserData, id: string): Promise<string> {
-    let responseMessage = "Producto no eliminado";  // Valor predeterminado en caso de error
-
+    let responseMessage = "Producto no eliminado";
     console.log(`[API/PRODUCTS] Deleting product with ID: ${id}`);
-
     try {
-        // Realizamos la solicitud DELETE
         const response = await axios.delete(deleteProduct(id), getAuthHeaders(user));
-
-        // Verificamos el código de respuesta
         if (response.status === 200) {
-            // Si el código de respuesta es 200 (exitoso), establecemos el mensaje de éxito
             responseMessage = "Producto eliminado exitosamente";
         } else {
-            // Si el código de respuesta no es 200, manejamos el error (aunque no es común en una DELETE)
             responseMessage = "Producto no eliminado (código no esperado)";
         }
-    } catch (error) {
-        // Si hay un error, capturamos el mensaje de la API
-        if (error.response && error.response.data) {
-            const errorMessage = error.response.data.message || "Error desconocido";
-            responseMessage = `Error: ${errorMessage}`;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+            if (error.response && error.response.data) {
+                const errorMessage = error.response.data.message || "Error desconocido";
+                responseMessage = `Error: ${errorMessage}`;
+            } else {
+                responseMessage = "Error al eliminar el producto";
+            }
         } else {
-            responseMessage = "Error al eliminar el producto";
+            responseMessage = "Error desconocido";
         }
     }
 
-    return responseMessage; // Devolvemos el mensaje de la respuesta
+    return responseMessage;
 }
 
 /** Función para obtener encabezados con token */

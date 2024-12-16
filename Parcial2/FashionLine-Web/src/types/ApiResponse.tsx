@@ -13,3 +13,8 @@ export type ProductDTO = {
     category: string;
     size: string;
 };
+
+export type UserData = {
+    authToken: string;
+    id: string;
+};
