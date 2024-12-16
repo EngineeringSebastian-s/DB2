@@ -240,7 +240,7 @@ public class ProductController {
             responses = {
                     @ApiResponse(
                             description = "Producto creado exitosamente",
-                            responseCode = "201",
+                            responseCode = "200",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDTO.class))
                     ),
                     @ApiResponse(

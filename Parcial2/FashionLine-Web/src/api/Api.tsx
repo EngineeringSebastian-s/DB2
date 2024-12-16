@@ -122,11 +122,17 @@ export async function createNewProduct(user: UserData, productData: ProductDTO):
 
     console.log("[API/PRODUCTS] Creating a new product");
 
-    await axios.post(createProduct, productData, getAuthHeaders(user))
-        .then(response => {
+    try {
+        const response = await axios.post(createProduct, productData, getAuthHeaders(user));
+
+        if (response.status === 200) {
             newProduct = response.data;
-        })
-        .catch(e => console.log("Error creating product: " + e));
+        } else {
+            console.error("Error creating product:", response.statusText);
+        }
+    } catch (e) {
+        console.error("Error creating product: ", e);
+    }
 
     return newProduct;
 }

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {deleteProductById, getAllProducts, updateExistingProduct} from '../api/Api';
+import {createNewProduct, deleteProductById, getAllProducts, updateExistingProduct} from '../api/Api';
 import {useAuthContext} from "../contexts/AuthContext";
 import Swal from 'sweetalert2';
 
@@ -47,10 +47,89 @@ const ProductsTable: React.FC = () => {
         return <div>{error}</div>;
     }
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         console.log("Create Product clicked");
-        // Lógica para crear un producto
+
+        if (!user) {
+            Swal.fire({
+                title: '¡Error!',
+                text: 'No estás autenticado, por favor inicia sesión.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+
+        try {
+            // Mostrar formulario modal para crear el nuevo producto
+            const { value: formData } = await Swal.fire({
+                title: "Create New Product",
+                html: `
+                <input id="swal-input1" class="swal2-input" placeholder="Name">
+                <input id="swal-input2" class="swal2-input" placeholder="Description">
+                <input id="swal-input3" class="swal2-input" type="number" placeholder="Price">
+                <input id="swal-input4" class="swal2-input" type="number" placeholder="Stock">
+                <input id="swal-input5" class="swal2-input" placeholder="Category">
+                <input id="swal-input6" class="swal2-input" placeholder="Size">
+            `,
+                focusConfirm: false,
+                preConfirm: () => {
+                    return {
+                        name: (document.getElementById("swal-input1") as HTMLInputElement).value,
+                        description: (document.getElementById("swal-input2") as HTMLInputElement).value,
+                        price: (document.getElementById("swal-input3") as HTMLInputElement).value,
+                        stock: (document.getElementById("swal-input4") as HTMLInputElement).value,
+                        category: (document.getElementById("swal-input5") as HTMLInputElement).value,
+                        size: (document.getElementById("swal-input6") as HTMLInputElement).value
+                    };
+                },
+                showCancelButton: true,
+                cancelButtonText: "Cancel",
+                confirmButtonText: "Create"
+            });
+
+            if (formData) {
+                const newProductData = {
+                    name: formData.name,
+                    description: formData.description,
+                    price: formData.price.toString(), // Asegurarse de enviar el precio como string
+                    stock: formData.stock.toString(), // Asegurarse de enviar el stock como string
+                    category: formData.category,
+                    size: formData.size
+                };
+
+                // Llamada a la API para crear el nuevo producto
+                const response = await createNewProduct(user, newProductData);
+
+                if (response) {
+                    setProducts((prevProducts) => [...prevProducts, response]);
+
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Product created successfully.",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "There was a problem creating the product. Please try again.",
+                        icon: "error",
+                        confirmButtonText: "Try Again"
+                    });
+                }
+            }
+        } catch (error) {
+            console.error("Error creating product:", error);
+            Swal.fire({
+                title: "Error!",
+                text: "Something went wrong while creating the product. Please try again later.",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+        }
     };
+
     const handleEdit = async (
         id: string,
         name: string,
@@ -116,6 +195,13 @@ const ProductsTable: React.FC = () => {
                 const response = await updateExistingProduct(user, id, updatedProductData);
 
                 if (response) {
+                    setProducts((prevProducts) =>
+                        prevProducts.map((product) =>
+                            product.id === id
+                                ? { ...product, ...updatedProductData }
+                                : product
+                        )
+                    );
                     Swal.fire({
                         title: "Success!",
                         text: "Product updated successfully.",
@@ -159,7 +245,6 @@ const ProductsTable: React.FC = () => {
         try {
             const response = await deleteProductById(user, id);
             if (response) {
-                // Eliminar localmente el producto de la lista
                 setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
                 Swal.fire({
                     title: '¡Éxito!',

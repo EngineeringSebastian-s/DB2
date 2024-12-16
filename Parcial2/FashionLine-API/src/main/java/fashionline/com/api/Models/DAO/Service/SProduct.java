@@ -169,6 +169,7 @@ public class SProduct implements SProductI {
      */
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) {
+        productDTO.setId(null);
         try {
             return Optional.of(productDTO)
                     .map(MProduct::toEntity)
