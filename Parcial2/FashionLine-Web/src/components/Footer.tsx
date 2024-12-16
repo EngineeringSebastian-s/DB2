@@ -24,7 +24,7 @@ export default function Footer() {
             <div className="footer">
                 <div className="container">
                     <div className="text-center text-white">
-                        <p>&copy; 2024 Your Company. All rights reserved.</p>
+                        <p>&copy; 2024 FashionLine. All rights reserved.</p>
                     </div>
                 </div>
             </div>

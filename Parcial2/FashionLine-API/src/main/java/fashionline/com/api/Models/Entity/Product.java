@@ -46,4 +46,12 @@ public class Product implements Serializable {
     @NotBlank(message = "El tamaño del producto no puede estar vacío.")
     @Field("size")
     private Size size;
+
+    public Product(String id) {
+        if (id != null) {
+            this.id = new ObjectId(id);
+        }else{
+            this.id = new ObjectId();
+        }
+    }
 }

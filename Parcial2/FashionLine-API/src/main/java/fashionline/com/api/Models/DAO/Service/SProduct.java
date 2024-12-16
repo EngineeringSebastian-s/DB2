@@ -194,6 +194,7 @@ public class SProduct implements SProductI {
      */
     @Override
     public ProductDTO updateProduct(String id, ProductDTO productDTO) {
+        productDTO.setId(id);
         try {
             return Optional.of(productDTO)
                     .map(MProduct::toEntity)

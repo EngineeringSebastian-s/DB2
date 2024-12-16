@@ -26,7 +26,7 @@ function App() {
                     element: <Home/>
                 },
                 {
-                    path: "/product",
+                    path: "/products",
                     element: <ProductsTable/>
                 }
             ],

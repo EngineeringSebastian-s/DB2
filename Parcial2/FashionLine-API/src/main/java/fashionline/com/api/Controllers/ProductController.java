@@ -291,7 +291,7 @@ public class ProductController {
                     @ApiResponse(
                             description = "Producto eliminado exitosamente",
                             responseCode = "200",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProductDTO.class))
+                            content = @Content(mediaType = "application/plane", schema = @Schema(implementation = String.class))
                     ),
                     @ApiResponse(
                             description = "Producto no eliminado",

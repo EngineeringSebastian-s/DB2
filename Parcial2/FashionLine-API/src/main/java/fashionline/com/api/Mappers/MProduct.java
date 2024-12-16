@@ -4,6 +4,7 @@ import fashionline.com.api.Models.DTO.ProductDTO;
 import fashionline.com.api.Models.Entity.Category;
 import fashionline.com.api.Models.Entity.Product;
 import fashionline.com.api.Models.Entity.Size;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,12 +20,13 @@ public class MProduct {
      * @return La entidad Product correspondiente.
      */
     public static Product toEntity(ProductDTO productDTO) {
-        Product product = new Product();
+        Product product = new Product(productDTO.getId());
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(Double.valueOf(productDTO.getPrice()));
         product.setCategory(Category.valueOf(productDTO.getCategory()));
         product.setSize(Size.valueOf(productDTO.getSize()));
+        product.setStock(Integer.parseInt(productDTO.getStock()));
         return product;
     }
 
@@ -39,8 +41,10 @@ public class MProduct {
         productDTO.setId(product.getId().toString());
         productDTO.setName(product.getName());
         productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice().toString());
         productDTO.setCategory(product.getCategory().toString());
         productDTO.setSize(product.getSize().toString());
+        productDTO.setStock(String.valueOf(product.getStock()));
         return productDTO;
     }
 }

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAuthContext } from "../contexts/AuthContext.tsx";
 import Login from "./Login.tsx";
 import Loading from "../components/Loading.tsx";
-import Navbar from "../components/Navbar.tsx";
+import Header from "../components/Header.tsx";
 import Footer from "../components/Footer.tsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 export default function Root() {
@@ -31,14 +31,14 @@ export default function Root() {
                         margin: 0,
                     }}
                 >
-                    <Navbar/>
+                    <Header/>
 
                     <div
                         className="container-fluid text-light p-5"
                         style={{
                             backgroundColor: '#016960',
                             minHeight: '80vh',
-                            height: '80vh',
+                            height: '100%',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
