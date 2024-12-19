@@ -276,9 +276,9 @@ Asegúrate de tener instalados los siguientes programas:
 
 ### **Estructura del Proyecto**
 El archivo `docker-compose.yml` define los servicios que componen la infraestructura del proyecto:
-- **MongoDB**: La base de datos que maneja toda la información relacionada con los cultivos y sensores.
+- **MongoDB**: La base de datos que maneja toda la información relacionada con los productos y usuarios.
 - **API fashionline**: El backend de la aplicación que interactúa con la base de datos y expone los endpoints REST.
-- **Web fashionline**: La aplicación frontend que se comunica con la API para mostrar información de los cultivos y permitir la interacción con el sistema.
+- **Web fashionline**: La aplicación frontend que se comunica con la API para mostrar información de los productos y permitir la interacción con el sistema.
 
 ### **Descripción de Servicios en `docker-compose.yml`**
 
@@ -436,7 +436,7 @@ Este comando detiene y elimina todos los contenedores, redes y volúmenes defini
    MongoDB proporciona un alto rendimiento tanto para operaciones de lectura como de escritura. Esto es particularmente importante para una tienda de ropa que constantemente agrega nuevos productos, actualiza el stock o registra nuevas compras. Las operaciones de escritura son rápidas y eficientes, y la base de datos maneja grandes volúmenes de datos sin que se vea afectada la velocidad de respuesta. A su vez, la optimización de las consultas permite una experiencia de usuario rápida, lo cual es crucial para las tiendas en línea.
 
 5. **Fácil integración con tecnologías modernas:**
-   MongoDB se integra de manera sencilla con frameworks populares de desarrollo backend como Node.js, Python, y Java. Esto facilita el trabajo de los desarrolladores, que pueden utilizar su conocimiento de estas tecnologías para crear aplicaciones de forma rápida y eficiente. La gran comunidad y el soporte de MongoDB aseguran que los desarrolladores puedan encontrar soluciones a problemas y mantenerse actualizados con las mejores prácticas. Además, su compatibilidad con diferentes herramientas de análisis de datos, como BI Connector, permite realizar informes y análisis avanzados sin complicaciones.
+   MongoDB se integra de manera sencilla con frameworks populares de desarrollo backend como Node.js, Python, y Java (En este caso). Esto facilita el trabajo de los desarrolladores, que pueden utilizar su conocimiento de estas tecnologías para crear aplicaciones de forma rápida y eficiente. La gran comunidad y el soporte de MongoDB aseguran que los desarrolladores puedan encontrar soluciones a problemas y mantenerse actualizados con las mejores prácticas. Además, su compatibilidad con diferentes herramientas de análisis de datos, como BI Connector, permite realizar informes y análisis avanzados sin complicaciones.
 
 6. **Alta disponibilidad y resiliencia:**
    MongoDB ofrece características como replicación y distribución geográfica de datos, lo que garantiza la alta disponibilidad de la base de datos. En un negocio de e-commerce o tienda física con ventas online, la disponibilidad continua es crucial para no perder ventas ni causar frustración en los clientes. En caso de fallos en uno de los servidores, MongoDB es capaz de mantener la disponibilidad de los datos y reducir los tiempos de inactividad.
