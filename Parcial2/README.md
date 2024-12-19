@@ -1,3 +1,158 @@
+
+# Documentación del Proyecto FashionLine
+
+## Descripción General
+FashionLine es un sistema de gestión de productos orientado a una tienda de moda. Está compuesto por una API desarrollada en Java con Spring Boot, un frontend basado en ReactJS y Bootstrap, y una base de datos alojada en MongoDB Atlas. También incluye soporte para entornos locales de desarrollo y despliegue en la nube.
+
+---
+
+## Tecnologías Utilizadas
+
+### **Backend (API)**
+- **Lenguaje:** Java
+- **Framework:** Spring Boot
+  - Gestión de dependencias con Maven.
+  - Controladores REST para la gestión de endpoints.
+  - Seguridad mediante JWT para autenticación y autorización.
+- **Base de Datos:** MongoDB
+  - En entorno de producción, se utiliza MongoDB Atlas con la base de datos `fashionline`.
+  - En entorno local, se incluye un script de inicialización (`init.js`) que configura la base de datos con datos iniciales.
+  - Conexión mediante Spring Data MongoDB y repositorios extendidos de `MongoRepository`.
+- **Documentación:** Swagger (OpenAPI) para documentar y probar los endpoints.
+
+**Dockerización del Entorno Local:**
+- La API está preparada para ejecutarse en un entorno Dockerizado.
+- Imagen oficial de MongoDB utilizada para la base de datos local.
+  ```Dockerfile
+  # Usar la imagen oficial de MongoDB
+  FROM mongo:latest
+
+  # Copiar el script de inicialización al directorio especial de MongoDB
+  COPY init.js /docker-entrypoint-initdb.d/
+
+  # Exponer el puerto de MongoDB
+  EXPOSE 27017
+  ```
+- La API también tiene soporte local mediante Docker:
+  ```Dockerfile
+  # Uso de imagen base con Java 17
+  FROM openjdk:17-slim
+
+  # Directorio donde se colocará la aplicación en el contenedor
+  WORKDIR /app
+
+  # Copiar el archivo jar del proyecto al directorio /app en el contenedor
+  COPY target/FashionLine-API-0.0.1-SNAPSHOT.jar /app/api-fashionline.jar
+
+  # Exponer el puerto que usa la aplicación
+  EXPOSE 8091
+
+  # Comando para ejecutar aplicación
+  CMD ["java","-jar","/app/api-fashionline.jar"]
+  ```
+
+**Despliegue en la Nube:**
+- **API alojada en:** [Render](https://render.com) ([Enlace a la API](https://api-fashionline.onrender.com/))
+- **Base de datos alojada en:** [MongoDB Atlas](https://www.mongodb.com/atlas) ([Enlace a la Base de Datos](https://fashionline-us-east-1.s54jy.mongodb.net))
+
+---
+
+### **Frontend**
+- **Framework:** ReactJS
+  - Configuración y desarrollo con Vite para optimizar el entorno de desarrollo.
+  - Tipado con TypeScript para mayor robustez.
+- **Estilo:** Bootstrap 5
+  - Componentes responsivos y personalizables para crear una interfaz amigable.
+- **Rutas:** React Router para la navegación entre páginas.
+- **Gestión de Estado:** Context API para el manejo de autenticación y datos compartidos.
+
+**Dockerización del Entorno Local:**
+- El frontend está preparado para ejecutarse en un entorno Dockerizado.
+  ```Dockerfile
+  # Usar la imagen oficial de Node.js 20
+  FROM node:20-alpine
+
+  # Directorio de trabajo dentro del contenedor
+  WORKDIR /app
+
+  # Copiar los archivos de package.json y package-lock.json al contenedor
+  COPY package.json package-lock.json ./
+
+  # Instalar la versión específica de npm (10.8.2)
+  RUN npm install -g npm@10.8.2
+
+  # Instalar las dependencias del proyecto
+  RUN npm install
+
+  # Copiar el resto de los archivos al contenedor
+  COPY . ./
+
+  # Compilar TypeScript si es necesario
+  RUN npm run build
+
+  # Instalar el paquete 'serve' para servir los archivos estáticos
+  RUN npm install -g serve
+
+  # Exponer el puerto en el que se va a correr la aplicación (puerto por defecto 5173)
+  EXPOSE 5173
+
+  # Comando para arrancar el servidor estático de producción
+  CMD ["serve", "-s", "dist", "-l", "5173"] 
+  ```
+
+**Despliegue en la Nube:**
+- **Frontend alojado en:** [Netlify](https://www.netlify.com) ([Enlace a la Web](https://fashionline.netlify.app/))
+
+---
+
+## Arquitectura
+El proyecto está estructurado en tres capas principales:
+
+1. **Base de Datos:**
+   - MongoDB es el motor de base de datos utilizado.
+   - En producción, MongoDB Atlas maneja la base de datos `fashionline`.
+   - En desarrollo local, se utiliza un contenedor Docker con un script de inicialización (`init.js`).
+
+2. **API:**
+   - Desarrollada en Java con Spring Boot.
+   - Incluye controladores para la gestión de usuarios, productos y autenticación.
+   - Servicios (Services) para implementar lógica de negocio y validaciones.
+   - Repositorios (Repositories) para interactuar con MongoDB.
+
+3. **Frontend:**
+   - ReactJS y Bootstrap se combinan para crear una interfaz dinámica y atractiva.
+   - Componentes reutilizables y navegación fluida entre vistas.
+
+---
+
+## Ejecución del Proyecto
+
+### **Entorno Local**
+1. Clona el repositorio de GitHub.
+2. Configura las variables de entorno en el archivo `.env`.
+3. Levanta los servicios de base de datos con Docker:
+   ```bash
+   docker-compose up -d
+   ```
+4. Ejecuta la API localmente:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+5. Ejecuta el frontend:
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+### **Despliegue en Producción**
+- **Frontend:** Disponible en Netlify.
+- **API:** Disponible en Render.
+- **Base de Datos:** MongoDB Atlas.
+
+
+
+
+
 # **Demostración Local de Fashionline con Docker Compose**
 
 Esta documentación describe cómo levantar y ejecutar el proyecto fashionline en tu entorno local utilizando Docker Compose. Se describen los servicios involucrados, sus configuraciones y cómo ejecutar los contenedores.
