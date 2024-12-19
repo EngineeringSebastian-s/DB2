@@ -150,8 +150,146 @@ El proyecto está estructurado en tres capas principales:
 - **Base de Datos:** MongoDB Atlas.
 
 
+## Estructura del Proyecto
 
+Este proyecto está compuesto por dos partes principales: **Backend (API)** y **Frontend**. A continuación, se detalla la estructura de carpetas y archivos para cada una de estas secciones, así como su propósito.
 
+### 1. **Estructura de la API (Backend)**
+
+```
+E:.
+├───.idea
+├───.mvn
+├───src
+│   └───main
+│       ├───java
+│       │   └───fashionline
+│       │       └───com
+│       │           └───api
+│       │               ├───Controllers
+│       │               │   ├─── AuthController.java
+│       │               │   ├─── ProductController.java
+│       │               │   ├─── UserController.java
+│       │               ├───Models
+│       │               │   ├───DAO
+│       │               │   │   ├─── Repository
+│       │               │   │   └─── Service
+│       │               │   ├───DTO
+│       │               │   ├───Entity
+│       │               ├───Security
+│       │               │   ├─── headers
+│       │               │   └─── jwt
+│       │               └───Validation
+│       └───resources
+│           └─── application.properties
+└───target
+```
+
+#### Descripción de Carpetas en el Backend:
+
+- **`Controllers`**: Contiene los controladores de la API, que son responsables de manejar las solicitudes HTTP. Los controladores definen los puntos finales de la API y los métodos que se ejecutan cuando se accede a esos puntos finales. Ejemplos: `AuthController.java`, `ProductController.java`, `UserController.java`.
+
+- **`Models`**: Define la estructura de los datos y la lógica de negocio del backend. Está subdividido en:
+  - **`DAO`**: Contiene los repositorios que interactúan con la base de datos. Aquí se definen las clases que manejan las consultas a la base de datos.
+  - **`DTO`**: Los objetos de transferencia de datos que se usan para intercambiar información entre el frontend y el backend.
+  - **`Entity`**: Define las entidades que corresponden a las tablas en la base de datos (por ejemplo, `Product`, `User`, `Category`).
+  
+- **`Security`**: Contiene las configuraciones relacionadas con la seguridad, como la autenticación y autorización, incluyendo la implementación de JWT para el manejo de sesiones y control de acceso.
+
+- **`Validation`**: Contiene las clases encargadas de validar los datos entrantes. Estas clases definen las reglas de validación para las entradas de los usuarios, como las clases `VProduct` y `VUser`.
+
+- **`resources`**: Esta carpeta contiene archivos de configuración y recursos. Un archivo clave aquí es `application.properties`, que almacena la configuración del servidor, como la configuración de la base de datos y la seguridad.
+
+### 2. **Estructura del Frontend (Web)**
+
+```
+E:.
+├───public
+├───src
+│   ├───api
+│   ├───assets
+│   ├───components
+│   ├───contexts
+│   ├───pages
+│   ├───routes
+│   ├───types
+│   └───utils
+```
+
+#### Descripción de Carpetas en el Frontend:
+
+- **`api`**: Esta carpeta contiene el código relacionado con la comunicación entre el frontend y la API del backend. Archivos como `Api.tsx` y `Endpoints.tsx` gestionan las solicitudes HTTP, configurando las rutas a la API y el manejo de errores.
+
+- **`assets`**: Contiene archivos estáticos que se usan en la aplicación web, como imágenes o íconos, almacenados en subcarpetas como `images/`.
+
+- **`components`**: Los componentes de la interfaz de usuario (UI) que son reutilizables en diferentes partes de la aplicación. Ejemplos incluyen el `Header.tsx`, `Footer.tsx` y `Navbar.tsx`. Los componentes pueden ser más complejos, como el `Navbar`, que tiene una carpeta propia (`Navbar`), que incluye la interfaz (`INavbar.ts`) y la implementación (`Navbar.tsx`).
+
+- **`contexts`**: Implementa el contexto de React, que se utiliza para gestionar el estado global de la aplicación, como la autenticación de usuarios a través de `AuthContext.tsx`.
+
+- **`pages`**: Contiene las páginas principales de la aplicación, que son componentes grandes que representan diferentes vistas. Por ejemplo, `App.tsx`, `Login.tsx`, `Home.tsx`.
+
+- **`routes`**: Define las rutas de la aplicación, mapeando las URLs a los componentes correspondientes. Incluye páginas como `ErrorPage.tsx` y `ProductTable.tsx`.
+
+- **`types`**: Contiene definiciones de tipos TypeScript para asegurar la correcta gestión de tipos de datos en la aplicación. Ejemplo: `ApiResponse.tsx`.
+
+- **`utils`**: Almacena funciones de utilidad reutilizables, como las operaciones CRUD definidas en `Crud.tsx`, que se encargan de la lógica para crear, leer, actualizar y eliminar datos.
+
+### 3. **Estructura de la Base de Datos**
+
+La base de datos está configurada en MongoDB y se utiliza para almacenar la información relacionada con los usuarios y los productos en el sistema de *FashionLine*. A continuación, se detalla la estructura de la base de datos, con las colecciones y los documentos que contiene.
+
+### 1. Colección: `usuarios`
+
+Esta colección almacena la información de los usuarios registrados en la plataforma. Cada documento en la colección representa un usuario con los siguientes campos:
+
+- `email`: Correo electrónico del usuario, que actúa como identificador único.
+- `password`: Contraseña del usuario, almacenada de forma segura utilizando hash.
+- `_class`: Clase Java correspondiente a este documento, en este caso `fashionline.com.api.Models.Entity.User`.
+
+**Ejemplo de documento en la colección `usuarios`:**
+
+```json
+{
+    "email": "juan.perez@example.com",
+    "password": "$2a$12$4n181KR5etTwn1Qp1ka2je79lrxXYhVuUa3kqvQfQPDx1V2LcCTKu",
+    "_class": "fashionline.com.api.Models.Entity.User"
+}
+```
+
+### 2. Colección: `productos`
+
+Esta colección contiene los productos disponibles en la tienda. Cada documento en la colección describe un producto con los siguientes campos:
+
+- `name`: Nombre del producto.
+- `description`: Descripción detallada del producto.
+- `price`: Precio del producto.
+- `stock`: Cantidad de unidades disponibles en inventario.
+- `category`: Categoría a la que pertenece el producto, como *CLOTHING*, *FOOTWEAR*, *ACCESSORIES*, etc.
+- `size`: Talla del producto (ej. S, M, L, XL, UNIQUE).
+
+**Ejemplo de documentos en la colección `productos`:**
+
+```json
+{
+    "name": "Camisa Casual Blanca",
+    "description": "Camisa de algodón con diseño clásico ideal para cualquier ocasión.",
+    "price": 150000,
+    "stock": 30,
+    "category": "CLOTHING",
+    "size": "M"
+}
+```
+
+```json
+{
+    "name": "Jean Slim Azul",
+    "description": "Pantalón de mezclilla de corte ajustado para un look moderno.",
+    "price": 200000,
+    "stock": 20,
+    "category": "CLOTHING",
+    "size": "L"
+}
+```
 
 # **Demostración Local de Fashionline con Docker Compose**
 
