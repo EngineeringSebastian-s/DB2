@@ -123,32 +123,6 @@ El proyecto está estructurado en tres capas principales:
    - ReactJS y Bootstrap se combinan para crear una interfaz dinámica y atractiva.
    - Componentes reutilizables y navegación fluida entre vistas.
 
----
-
-## Ejecución del Proyecto
-
-### **Entorno Local**
-1. Clona el repositorio de GitHub.
-2. Configura las variables de entorno en el archivo `.env`.
-3. Levanta los servicios de base de datos con Docker:
-   ```bash
-   docker-compose up -d
-   ```
-4. Ejecuta la API localmente:
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-5. Ejecuta el frontend:
-   ```bash
-   npm install
-   npm run dev
-   ```
-
-### **Despliegue en Producción**
-- **Frontend:** Disponible en Netlify.
-- **API:** Disponible en Render.
-- **Base de Datos:** MongoDB Atlas.
-
 
 ## Estructura del Proyecto
 
@@ -291,24 +265,24 @@ Esta colección contiene los productos disponibles en la tienda. Cada documento 
 }
 ```
 
-# **Demostración Local de Fashionline con Docker Compose**
+## Ejecucción del Proyecto
 
 Esta documentación describe cómo levantar y ejecutar el proyecto fashionline en tu entorno local utilizando Docker Compose. Se describen los servicios involucrados, sus configuraciones y cómo ejecutar los contenedores.
 
-## **Requisitos Previos**
+### **Requisitos Previos**
 Asegúrate de tener instalados los siguientes programas:
 - **Docker**: [Instrucciones de instalación](https://docs.docker.com/get-docker/)
 - **Docker Compose**: Viene integrado con Docker Desktop, pero si usas Linux o configuraciones personalizadas, asegúrate de tener Docker Compose instalado. [Instrucciones de instalación](https://docs.docker.com/compose/install/)
 
-## **Estructura del Proyecto**
+### **Estructura del Proyecto**
 El archivo `docker-compose.yml` define los servicios que componen la infraestructura del proyecto:
 - **MongoDB**: La base de datos que maneja toda la información relacionada con los cultivos y sensores.
 - **API fashionline**: El backend de la aplicación que interactúa con la base de datos y expone los endpoints REST.
 - **Web fashionline**: La aplicación frontend que se comunica con la API para mostrar información de los cultivos y permitir la interacción con el sistema.
 
-## **Descripción de Servicios en `docker-compose.yml`**
+### **Descripción de Servicios en `docker-compose.yml`**
 
-### 1. **Servicio para la Base de Datos (MongoDB)**
+#### 1. **Servicio para la Base de Datos (MongoDB)**
 Este servicio ejecuta un contenedor MongoDB, con la configuración necesaria para iniciar la base de datos `Fashionline`.
 
 ```yaml
@@ -328,7 +302,7 @@ Este servicio ejecuta un contenedor MongoDB, con la configuración necesaria par
 - **Volúmenes**: Se utiliza un volumen (`mongo_data`) para persistir los datos de la base de datos.
 - **Redes**: El contenedor se conecta a la red `fashionline-network` para comunicarse con otros servicios.
 
-### 2. **Servicio para la API (Backend)**
+#### 2. **Servicio para la API (Backend)**
 Este servicio ejecuta el contenedor de la API de fashionline, configurando las variables de entorno necesarias para conectarse a la base de datos MongoDB y manejar la lógica de autenticación y operaciones de la API.
 
 ```yaml
@@ -366,7 +340,7 @@ api-fashionline:
 - **Dependencias**: El servicio depende de `db-fashionline` para asegurar que la base de datos esté lista antes de iniciar la API.
 - **Puertos**: Expone el puerto 8091 para que la API sea accesible desde el navegador.
 
-### 3. **Servicio para la Aplicación Web (Frontend)**
+#### 3. **Servicio para la Aplicación Web (Frontend)**
 Este servicio ejecuta el contenedor de la aplicación web, configurando la URL base de la API para que el frontend se comunique con el backend.
 
 ```yaml
@@ -385,7 +359,7 @@ web-fashionline:
 - **Variables de entorno**: Configura la variable `VITE_API_BASE_URL` para que el frontend se comunique con la API de fashionline a través de `http://localhost:8091`.
 - **Puertos**: Expone el puerto 5173 para acceder a la aplicación web.
 
-### 4. **Volúmenes**
+#### 4. **Volúmenes**
 Para garantizar la persistencia de los datos de la base de datos MongoDB, se define un volumen:
 ```yaml
 volumes:
@@ -393,7 +367,7 @@ volumes:
 ```
 El volumen `mongo_data` se utiliza para almacenar los datos de MongoDB en el sistema local.
 
-### 5. **Redes**
+#### 5. **Redes**
 Se define una red llamada `fashionline-network` para que los contenedores puedan comunicarse entre sí.
 
 ```yaml
@@ -402,12 +376,12 @@ networks:
     driver: bridge
 ```
 
-## **Cómo Ejecutar el Proyecto**
+### **Cómo Ejecutar el Proyecto**
 
-### **Paso 1: Clonar o Descarga el Proyecto**
+#### **Paso 1: Clonar o Descarga el Proyecto**
 Asegúrate de tener todos los archivos necesarios en tu máquina local, incluyendo el archivo `docker-compose.yml`.
 
-### **Paso 2: Realiza el pull de las imágenes**
+#### **Paso 2: Realiza el pull de las imágenes**
 
    ```bash
    docker pull sebastian190030/db-fashionline:latest
@@ -415,7 +389,7 @@ Asegúrate de tener todos los archivos necesarios en tu máquina local, incluyen
    docker pull sebastian190030/web-fashionline:latest
    ```
 
-### **Paso 3: Iniciar los Servicios con Docker Compose**
+#### **Paso 3: Iniciar los Servicios con Docker Compose**
 
 Desde el directorio donde se encuentra tu archivo `docker-compose.yml`, ejecuta el siguiente comando para iniciar los contenedores:
 
@@ -427,13 +401,13 @@ Este comando:
 - **`-p fashionline`**: Le da el nombre `fashionline` al proyecto, lo que afecta los nombres de los contenedores, redes y volúmenes.
 - **`up -d`**: Levanta los contenedores en segundo plano (modo "detached").
 
-### **Paso 4: Acceder a los Servicios**
+#### **Paso 4: Acceder a los Servicios**
 
 - **Base de Datos (MongoDB)**: Accede a la base de datos usando la URI de conexión `mongodb://admin:admin@localhost:27018/fashionline/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongo`.
 - **API fashionline**: Accede a la API en `http://localhost:8091`.
 - **Aplicación Web**: Accede a la aplicación frontend en `http://localhost:5173`.
 
-### **Paso 5: Detener los Servicios**
+#### **Paso 5: Detener los Servicios**
 
 Para detener todos los servicios, simplemente ejecuta:
 
@@ -442,3 +416,30 @@ docker-compose -p fashionline down
 ```
 
 Este comando detiene y elimina todos los contenedores, redes y volúmenes definidos en el archivo `docker-compose.yml`.
+
+## Justificación de la elección de la base de datos NoSQL
+
+### **Selección de la Base de Datos NoSQL**  
+**Base de datos NOSQL:** MongoDB  
+**Justificación:**
+
+1. **Flexibilidad en el manejo de datos:**
+   MongoDB utiliza un modelo de datos basado en documentos JSON (BSON internamente), lo que permite manejar información de manera flexible y dinámica. Esta característica es especialmente importante para una tienda de ropa, donde los productos tienen características que varían constantemente, como tallas, colores, materiales, precios, entre otros. Los esquemas de MongoDB no son rígidos, lo que significa que se pueden agregar nuevos atributos a los productos sin tener que modificar una estructura de tabla fija, como ocurre en las bases de datos relacionales. Además, este modelo permite la inclusión de datos más complejos o menos estructurados, como imágenes o descripciones extendidas.
+
+2. **Escalabilidad horizontal:**
+   MongoDB está diseñado para escalar horizontalmente, lo que significa que es capaz de distribuir grandes volúmenes de datos a través de múltiples servidores (sharding). Esto es crucial en un contexto de negocio en crecimiento, como una tienda de ropa que puede expandir su catálogo o su base de clientes a medida que se expande. A medida que la cantidad de productos, clientes o transacciones aumente, MongoDB permite que el sistema crezca sin comprometer el rendimiento. Esto se traduce en una alta disponibilidad y menor riesgo de caída del sistema durante picos de tráfico o expansión de la base de datos.
+
+3. **Consultas y agregaciones poderosas:**
+   A pesar de ser una base de datos NoSQL, MongoDB ofrece un conjunto avanzado de herramientas para realizar consultas complejas y agregaciones. La capacidad de realizar búsquedas por atributos específicos, como nombre, categoría, precio, color, o incluso atributos más avanzados como rangos de precios o filtros por más de un criterio, es una característica valiosa para gestionar el inventario de productos de manera eficiente. Además, MongoDB permite realizar agregaciones complejas, como obtener el total de ventas por producto o categoría, identificar los productos más vendidos, o realizar análisis sobre tendencias de compra. Estas capacidades son esenciales para generar reportes que ayuden a la toma de decisiones estratégicas.
+
+4. **Alto rendimiento para lecturas y escrituras:**
+   MongoDB proporciona un alto rendimiento tanto para operaciones de lectura como de escritura. Esto es particularmente importante para una tienda de ropa que constantemente agrega nuevos productos, actualiza el stock o registra nuevas compras. Las operaciones de escritura son rápidas y eficientes, y la base de datos maneja grandes volúmenes de datos sin que se vea afectada la velocidad de respuesta. A su vez, la optimización de las consultas permite una experiencia de usuario rápida, lo cual es crucial para las tiendas en línea.
+
+5. **Fácil integración con tecnologías modernas:**
+   MongoDB se integra de manera sencilla con frameworks populares de desarrollo backend como Node.js, Python, y Java. Esto facilita el trabajo de los desarrolladores, que pueden utilizar su conocimiento de estas tecnologías para crear aplicaciones de forma rápida y eficiente. La gran comunidad y el soporte de MongoDB aseguran que los desarrolladores puedan encontrar soluciones a problemas y mantenerse actualizados con las mejores prácticas. Además, su compatibilidad con diferentes herramientas de análisis de datos, como BI Connector, permite realizar informes y análisis avanzados sin complicaciones.
+
+6. **Alta disponibilidad y resiliencia:**
+   MongoDB ofrece características como replicación y distribución geográfica de datos, lo que garantiza la alta disponibilidad de la base de datos. En un negocio de e-commerce o tienda física con ventas online, la disponibilidad continua es crucial para no perder ventas ni causar frustración en los clientes. En caso de fallos en uno de los servidores, MongoDB es capaz de mantener la disponibilidad de los datos y reducir los tiempos de inactividad.
+
+7. **Costos y eficiencia operativa:**
+   Al ser una base de datos de código abierto, MongoDB permite reducir costos iniciales de implementación y mantenimiento. Además, su arquitectura orientada a documentos facilita la administración y operación en comparación con bases de datos tradicionales que requieren la administración de tablas complejas y relaciones estrictas. En combinación con su capacidad para escalar de manera eficiente, MongoDB ofrece una solución rentable para empresas en crecimiento.
